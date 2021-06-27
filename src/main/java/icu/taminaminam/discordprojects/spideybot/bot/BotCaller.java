@@ -10,13 +10,20 @@ public class BotCaller {
     private static String prefix = "spidey ";
 
     @DiscordEventListener
-    public static Mono<Message> call(Message msg, String command, String response){
+    public static Mono<Message> call(Message msg, String command, boolean equals_check, String response){
 
         String text = prefix + command;
 
-        if (text.equals(msg.getContent())) {
-            return msg.getChannel()
-                    .flatMap(ch -> ch.createMessage(response));
+        if (equals_check) {
+            if (text.equals(msg.getContent())) {
+                return msg.getChannel()
+                        .flatMap(ch -> ch.createMessage(response));
+            }
+        } else{
+            if (text.startsWith(text)) {
+                return msg.getChannel()
+                        .flatMap(ch -> ch.createMessage(response));
+            }
         }
 
         return Mono.empty();
