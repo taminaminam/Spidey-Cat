@@ -15,14 +15,14 @@ public class PingMessageEvent {
     public Mono<Message> pingCommand(MessageCreateEvent messageCreateEvent) {
         Message msg = messageCreateEvent.getMessage();
 
-        return BotCaller.call(msg, "ping", "Pang!");
+        return BotCaller.call(msg, "ping", false, "Pang!");
     }
 
     @DiscordEventListener
     public Mono<Message> pongCommand(MessageCreateEvent messageCreateEvent) {
         Message msg = messageCreateEvent.getMessage();
 
-        return BotCaller.call(msg, "pong", "Ping!");
+        return BotCaller.call(msg, "pong", false, "Ping!");
     }
 
     @DiscordEventListener
@@ -40,6 +40,6 @@ public class PingMessageEvent {
         responseBuilder.append(timeElapsed);
         responseBuilder.append("ms");
 
-        return BotCaller.call(msg, "ping time", responseBuilder.toString());
+        return BotCaller.call(msg, "ping time", false, responseBuilder.toString());
     }
 }
