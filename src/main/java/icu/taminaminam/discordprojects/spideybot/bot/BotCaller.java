@@ -7,9 +7,9 @@ import reactor.core.publisher.Mono;
 
 public class BotCaller {
 
-    private static String prefix = "spidey ";
+    public static String prefix = "spidey ";
 
-    @DiscordEventListener
+
     public static Mono<Message> call(Message msg, String command, boolean equals_check, String response){
 
         String text = prefix + command;
@@ -20,7 +20,7 @@ public class BotCaller {
                         .flatMap(ch -> ch.createMessage(response));
             }
         } else{
-            if (text.startsWith(text)) {
+            if (text.startsWith(msg.getContent())) {
                 return msg.getChannel()
                         .flatMap(ch -> ch.createMessage(response));
             }
