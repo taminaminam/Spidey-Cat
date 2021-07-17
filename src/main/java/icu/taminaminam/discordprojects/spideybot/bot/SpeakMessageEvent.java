@@ -25,7 +25,7 @@ public class SpeakMessageEvent{
         responseBuilder.delete(0, BotCaller.prefix.length());
         responseBuilder.delete(0, this.command.length());
 
-        return BotCaller.call(msg, command, false, responseBuilder.toString());
+        return BotCaller.callStartsWithCommand(msg, command, responseBuilder.toString(), false);
         //return BotCaller.call(msg, command, false, commandtext);
 
     }
