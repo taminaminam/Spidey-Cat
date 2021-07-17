@@ -15,12 +15,12 @@ public class BotCaller {
         String text = prefix + command;
 
         if (equals_check) {
-            if (text.equals(msg.getContent())) {
+            if (msg.getContent().equals(text)) {
                 return msg.getChannel()
                         .flatMap(ch -> ch.createMessage(response));
             }
         } else{
-            if (text.startsWith(msg.getContent())) {
+            if (msg.getContent().startsWith(text)) {
                 return msg.getChannel()
                         .flatMap(ch -> ch.createMessage(response));
             }

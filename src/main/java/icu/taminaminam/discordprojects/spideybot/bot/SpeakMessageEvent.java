@@ -8,8 +8,9 @@ import reactor.core.publisher.Mono;
 
 
 @Component
-public class Speak {
-    String command = "echo";
+public class SpeakMessageEvent{
+
+    public String command = "echo ";
 
     @DiscordEventListener
     public Mono<Message> echoCommand(MessageCreateEvent messageCreateEvent) {
@@ -18,8 +19,14 @@ public class Speak {
         String commandtext = msg.getContent();
 
         StringBuilder responseBuilder = new StringBuilder();
-        responseBuilder.append(commandtext.substring(BotCaller.prefix.length() + 1 + command.length()));
+
+        responseBuilder.append(commandtext);
+
+        responseBuilder.delete(0, BotCaller.prefix.length());
+        responseBuilder.delete(0, this.command.length());
 
         return BotCaller.call(msg, command, false, responseBuilder.toString());
+        //return BotCaller.call(msg, command, false, commandtext);
+
     }
 }
